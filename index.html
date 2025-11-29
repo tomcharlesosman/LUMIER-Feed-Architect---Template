@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUMIER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 
+      Font Usage:
+      - Bodoni Moda / Space Grotesk (Lumier)
+      - Playfair Display / Inter (Onyx)
+      - Rajdhani / Share Tech Mono (Vapor)
+      - DM Serif Display / DM Sans (Botanical)
+      - Inter Tight / Roboto Mono (Swiss)
+      - Cormorant Garamond / Proza Libre (Vogue)
+      - Syne / Public Sans (Gallery)
+      - Outfit / Lora (Scandi)
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500;600&family=Space+Grotesk:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=DM+Serif+Display&family=DM+Sans:wght@400;500&family=Inter+Tight:wght@400;600&family=Roboto+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Proza+Libre:wght@400;500&family=Syne:wght@400;700;800&family=Public+Sans:wght@300;400;600&family=Outfit:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+    <script>
+      /**
+       * ==========================================
+       * THEME ENGINE
+       * ==========================================
+       * Change the variable below to switch the entire app's look and feel.
+       * Options: 'LUMIER', 'ONYX', 'VAPOR', 'BOTANICAL', 'SWISS', 'VOGUE', 'GALLERY', 'SCANDI'
+       */
+      const ACTIVE_THEME = 'LUMIER'; 
+
+      const THEMES = {
+        // ORIGINAL: Luxury, Sharp, Thin Borders
+        LUMIER: {
+          colors: {
+            sand: '#fdfcf8',
+            stone: '#e6e4dc',
+            charcoal: '#1a1a1a',
+            gold: '#d4af37',
+          },
+          fonts: {
+            serif: ['"Bodoni Moda"', 'serif'],
+            sans: ['"Space Grotesk"', 'sans-serif'],
+          },
+          shapes: {
+            radius: '0px',
+            border: '1px',
+          }
+        },
+        // DARK MODE: Sharp, Stealth
+        ONYX: {
+          colors: {
+            sand: '#0a0a0a',
+            stone: '#1f1f1f',
+            charcoal: '#e5e5e5',
+            gold: '#ffffff',
+          },
+          fonts: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+          shapes: {
+            radius: '0px',
+            border: '1px',
+          }
+        },
+        // CYBER: Slight chamfer or sharp
+        VAPOR: {
+          colors: {
+            sand: '#050510',
+            stone: '#1a1a3a',
+            charcoal: '#00f3ff',
+            gold: '#ff00ff',
+          },
+          fonts: {
+            serif: ['"Rajdhani"', 'sans-serif'],
+            sans: ['"Share Tech Mono"', 'monospace'],
+          },
+          shapes: {
+            radius: '0px',
+            border: '1px',
+          }
+        },
+        // ORGANIC: Soft, Rounded, Friendly
+        BOTANICAL: {
+          colors: {
+            sand: '#f4f7f5',
+            stone: '#dae3dd',
+            charcoal: '#2d3b34',
+            gold: '#8c6b5d',
+          },
+          fonts: {
+            serif: ['"DM Serif Display"', 'serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+          },
+          shapes: {
+            radius: '12px',
+            border: '1px',
+          }
+        },
+        // SWISS: Strict, Boxy, Heavy Borders
+        SWISS: {
+          colors: {
+            sand: '#ffffff',
+            stone: '#f0f0f0',
+            charcoal: '#000000',
+            gold: '#ff3333',
+          },
+          fonts: {
+            serif: ['"Inter Tight"', 'sans-serif'],
+            sans: ['"Roboto Mono"', 'monospace'],
+          },
+          shapes: {
+            radius: '0px',
+            border: '2px', // Thick borders
+          }
+        },
+        // VOGUE: Sharp, Elegant
+        VOGUE: {
+          colors: {
+            sand: '#fffcf5',
+            stone: '#efebe0',
+            charcoal: '#111111',
+            gold: '#c5a059',
+          },
+          fonts: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Proza Libre"', 'sans-serif'],
+          },
+          shapes: {
+            radius: '0px',
+            border: '1px',
+          }
+        },
+        // GALLERY: Slightly Softened, Modern
+        GALLERY: {
+          colors: {
+            sand: '#f0f0f0',
+            stone: '#d9d9d9',
+            charcoal: '#000000',
+            gold: '#ccff00',
+          },
+          fonts: {
+            serif: ['"Syne"', 'sans-serif'],
+            sans: ['"Public Sans"', 'sans-serif'],
+          },
+          shapes: {
+            radius: '4px',
+            border: '1px',
+          }
+        },
+        // SCANDI: Very Round, Bubble-like
+        SCANDI: {
+          colors: {
+            sand: '#ffffff',
+            stone: '#f5f7fa',
+            charcoal: '#2d3748',
+            gold: '#718096',
+          },
+          fonts: {
+            serif: ['"Outfit"', 'sans-serif'],
+            sans: ['"Lora"', 'serif'],
+          },
+          shapes: {
+            radius: '20px', // Heavy rounding
+            border: '1px',
+          }
+        }
+      };
+
+      const selected = THEMES[ACTIVE_THEME] || THEMES.LUMIER;
+
+      // Apply CSS variables for generic usage if needed, mostly handled via Tailwind config below
+      document.documentElement.style.setProperty('--theme-radius', selected.shapes.radius);
+      document.documentElement.style.setProperty('--theme-border', selected.shapes.border);
+      document.documentElement.style.backgroundColor = selected.colors.sand;
+      document.documentElement.style.color = selected.colors.charcoal;
+
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: selected.fonts.serif,
+              sans: selected.fonts.sans,
+            },
+            colors: {
+              sand: selected.colors.sand,
+              stone: selected.colors.stone,
+              charcoal: selected.colors.charcoal,
+              gold: selected.colors.gold,
+            },
+            borderRadius: {
+              'theme': 'var(--theme-radius)', // Use with rounded-theme
+            },
+            borderWidth: {
+              'theme': 'var(--theme-border)', // Use with border-theme
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: var(--tw-color-sand); 
+        color: var(--tw-color-charcoal); 
+      }
+      
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 20px;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
