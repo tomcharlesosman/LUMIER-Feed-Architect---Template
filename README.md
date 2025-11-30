@@ -111,6 +111,13 @@ This is a static React application. It can be deployed to:
 **Environment Variables**:
 Ideally, you do not ship the API key in the code. The current implementation relies on `window.aistudio` (Google AI Studio environment) or `process.env.API_KEY` being injected at build time.
 
+## Security & Privacy
+
+This template is designed to be secure by default:
+-   **API Keys**: Never commit your `.env` file containing your API key to GitHub. The included `.gitignore` file prevents this.
+-   **Client-Side Processing**: All image processing happens in the user's browser or directly via Google's API. No intermediate server stores the user's photos.
+-   **Data Persistence**: History is stored in the browser's `IndexedDB`. It is local to the user's machine and is not shared.
+
 ## Project Structure
 
 -   `App.tsx`: Main application logic.

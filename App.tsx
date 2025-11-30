@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { ImageSize, GenerationStatus, HistoryItem } from './types';
 import { STYLE_PRESETS } from './constants';
@@ -172,9 +173,17 @@ const App: React.FC = () => {
     return <div className="min-h-screen bg-sand flex items-center justify-center font-serif text-charcoal">Loading Studio...</div>;
   }
 
+  // Determine if we have the specific AI Studio extension environment
+  const isAIStudioAvailable = !!(window.aistudio?.openSelectKey);
+
   return (
     <div className="h-screen bg-sand text-charcoal selection:bg-charcoal selection:text-white flex flex-col overflow-hidden">
-      {!hasKey && <ApiKeyModal onSelectKey={handleConnectKey} />}
+      {!hasKey && (
+        <ApiKeyModal 
+          onSelectKey={handleConnectKey} 
+          isAIStudioAvailable={isAIStudioAvailable} 
+        />
+      )}
 
       {expandedPreview && (
         <div 

@@ -15,9 +15,7 @@
 ## Authentication
 -   **Primary**: AI Studio Extension (Automatic Key Injection).
 -   **Fallback**: Environment Variable (`process.env.API_KEY`) for local development or production builds.
--   **Scale-Up Path**: If converting to a SaaS:
-    -   Implement Firebase Auth.
-    -   Move `persistence.ts` logic to Firestore/Storage.
+-   **UI Handling**: The app intelligently detects the environment. If the AI Studio extension is missing and no env var is found, it prompts the user to configure their `.env` file rather than showing a non-functional "Connect" button.
 
 ## Database Schema (Client-Side)
 The application currently uses an **IndexedDB** object store named `LumierDB` -> `history`.
@@ -49,3 +47,7 @@ To deploy this as a functional web app:
 1.  **Build**: Standard React build (`npm run build` or equivalent).
 2.  **Config**: No special server-side config needed unless proxying API calls.
 3.  **API Key**: Users must bring their own key (UI handles this), or you must bundle one (Not recommended for public templates).
+
+## Security (Git Hygiene)
+-   **Ignore Rules**: A `.gitignore` has been added to exclude `.env` files.
+-   **Leak Prevention**: Environment variables are injected at build time. Users should never commit their actual API key string to the repository.
